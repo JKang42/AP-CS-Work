@@ -32,7 +32,9 @@ public class Diff21
     
     public static void main(String[] args) //test
     {
-        testDiff21(19, 2);
-        testDiff21(30, 18);
+        testDiff21(19, 2, true);
+        testDiff21(30, 18, true);
+        testDiff21(10, 4, false);
+        testDiff21(24,5, false);
     }
 }
