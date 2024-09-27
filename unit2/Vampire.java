@@ -6,7 +6,7 @@ public class Vampire
         {
             return true; 
         } 
-        else if (!awake && (hour >= 6.0 && hour < 22.0)) //not awake = false
+        else if (!awake && (hour >= 6.0 && hour =< 22.0)) //not awake = false
         {
             return true; 
         }
