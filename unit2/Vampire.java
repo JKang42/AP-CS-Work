@@ -27,13 +27,13 @@ public class Vampire
             System.out.println("Incorrect");
         }
     }
-       
-    
-    
+        
     
     public static void main(String[] args) //test
     {
         testVampire(5.0f, true, true); // f is used for float or double
         testVampire(10.0f, false, false);
+        testVampire(3.0f, true, true);
+        testVampire(12.0f, false, false);
     }
 }

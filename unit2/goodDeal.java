@@ -23,7 +23,9 @@ public class GoodDeal
      public static void main(String[]args)
      {
        testGoodDeal(100,70, false);
-       testGoodDeal(100,80, true);
+       testGoodDeal(100,80, false);
+       testGoodDeal(100,60, true);
+       testGoodDeal(100,50, true);
 
      }
        
