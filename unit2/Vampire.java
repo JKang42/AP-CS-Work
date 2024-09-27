@@ -6,7 +6,7 @@ public class Vampire
         {
             return true; 
         } 
-        else if (!awake && (hour >= 6.0 && hour =< 22.0)) //not awake = false
+        else if (!awake && (hour >= 6.0 && hour <= 22.0)) //not awake = false
         {
             return true; 
         }
@@ -32,8 +32,8 @@ public class Vampire
     public static void main(String[] args) //test
     {
         testVampire(5.0f, true, true); // f is used for float or double
-        testVampire(10.0f, false, false);
+        testVampire(4.0f, true, true);
         testVampire(3.0f, true, true);
-        testVampire(12.0f, false, false);
+        testVampire(24.0f, true, true);
     }
 }

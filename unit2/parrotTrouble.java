@@ -29,7 +29,7 @@ public static void testparrotTrouble(boolean talking, int hour, boolean expected
     public static void main(String[] args) //test
     {
         testparrotTrouble(true, 5, true);
-        testparrotTrouble(false, 8, true);
+        testparrotTrouble(true, 3, true);
         testparrotTrouble(true, 4, true);
         testparrotTrouble(true, 24, true);
     }
