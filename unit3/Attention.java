@@ -1,6 +1,5 @@
 public class Attention 
 {
-
     public static boolean attention(String prefix) 
     {
         return prefix.startsWith("Hey you!"); 
