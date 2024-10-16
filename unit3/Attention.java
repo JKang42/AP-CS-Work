@@ -7,7 +7,7 @@ public class Attention
 
     public static void testAttention(String prefix, boolean expected) 
     {
-        boolean result = attention(prefix);
+        boolean result = attention(prefix)
         System.out.println("Input: " + prefix + " Expected: " + expected + " Result: " + result);
 
         if (result == expected) 

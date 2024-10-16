@@ -1,6 +1,5 @@
 public class Greetings 
 {
-
     public static String greetings(String name) 
     {
         return "Hello, " + name + ", how are you?";
