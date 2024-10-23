@@ -36,7 +36,7 @@ public class stringMatch
     {
         teststringMatch("aabbyy", "aabbzzyy", 3);
         teststringMatch("everyone", "smile", 0);
-        teststringMatch("abc", "abc", 1);
+        teststringMatch("abc", "abc", 2);
     }
     
 }
