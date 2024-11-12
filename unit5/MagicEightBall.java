@@ -4,7 +4,7 @@ public class MagicEightBall
     {
         if (Math.random() < .1)
             return response1;
-        else if (Math.random() < .3)
+        else if (Math.random() < .2)
             return response2;
         else if (Math.random() < .3)
             return response3;
