@@ -12,8 +12,8 @@ public class VehicleStatsTest {
         vehicles.add(new Unicycle());
 
         
-        System.out.println("Total number of wheels: ");
-        System.out.println(VehicleStats.totalWheels(vehicles));
+        int totalWheels = VehicleStats.totalWheels(vehicles);
+        System.out.println("Total number of wheels: " + totalWheels);  
 
         ArrayList<Vehicle> humanPowered = VehicleStats.humanPoweredVehicles(vehicles);
         System.out.println("Human-powered vehicles:");
@@ -22,3 +22,4 @@ public class VehicleStatsTest {
         }
     }
 }
+
