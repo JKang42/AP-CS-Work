@@ -77,7 +77,7 @@ public static void main(String[]args)
     ArrayList<Integer> ExpectedValues4 =  new ArrayList<Integer> ();
     ExpectedValues4.add(104);
     ExpectedValues4.add(101);
-    ExpectedValues4.add(102);
+    ExpectedValues.add(102);
     
     testfilterGoodScores(values,ExpectedValues);
     testfilterGoodScores(values2,ExpectedValues2);

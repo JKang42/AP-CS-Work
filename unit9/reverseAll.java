@@ -72,7 +72,7 @@ public static void main(String[]args)
     
     ArrayList<String> words5 = new ArrayList<String>();
     words5.add("4689");
-    words5.add("1057");
+    words.add("1057");
     
     ArrayList<String> ExpectedWord =  new ArrayList<String> ();
     ExpectedWord.add("dcba");
@@ -88,7 +88,7 @@ public static void main(String[]args)
     ExpectedWord3.add("izzi");
     
     ArrayList<String> ExpectedWord4 =  new ArrayList<String> ();
-    ExpectedWord4.add("olleh");
+    ExpectedWord4.add("olloeh");
     ExpectedWord4.add("dlrow");
     
     ArrayList<String> ExpectedWord5 =  new ArrayList<String> ();
