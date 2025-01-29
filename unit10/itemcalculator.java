@@ -19,9 +19,6 @@ public class itemcalculator {
     }
 
     public static String mostExpensiveItem(ArrayList<Item> items) {
-        if (items.isEmpty()) {
-            return null; 
-        }
 
         Item mostExpensive = items.get(0); 
 
