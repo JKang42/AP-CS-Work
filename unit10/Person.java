@@ -3,7 +3,7 @@ public class Person
     private String name;
     private int petnum;
 
-    public Item(String name, int petnum)
+    public Person(String name, int petnum)
     {
         this.name = name;
         this.petnum = petnum;
