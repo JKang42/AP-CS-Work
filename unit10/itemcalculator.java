@@ -23,11 +23,11 @@ public class itemcalculator {
             return null; 
         }
 
-        Item mostExpensive = items.get(0); // Initial assumption: first item is the most expensive
+        Item mostExpensive = items.get(0); 
 
         for (Item i : items) {
             if (i.getPrice() > mostExpensive.getPrice()) {
-                mostExpensive = i;  // Update if a more expensive item is found
+                mostExpensive = i;  
             }
         }
 
@@ -37,21 +37,21 @@ public class itemcalculator {
     public static void main(String[] args) {
         ArrayList<Item> items = new ArrayList<>();
 
-        // Adding items
+        
         items.add(new Item("Blu-ray", 86));
         items.add(new Item("Television", 190));
         items.add(new Item("Playlist CD", 67));
         items.add(new Item("Photobook", 200));
         items.add(new Item("Poster", 34));
 
-        // Printing the list of items
+        
         printItem(items);
 
-        // Printing the average price
+        
         System.out.println("Average price: ");
         System.out.println(averagePrice(items));
 
-        // Printing the most expensive item
+        
         System.out.println("Most expensive item: ");
         System.out.println(mostExpensiveItem(items));
     }
