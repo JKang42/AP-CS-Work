@@ -1,20 +1,100 @@
-import processing.core.*;  
 
-//need to stop paddle from going out of bounds
-//paddle needs to stop ball from passing through it 
-//show score 
-//class for the paddle & for the ball 
+
+    public void draw() {
+        background(0);
+
+        ball.update();
+        ball.draw();
+        ball.bounceOffWalls();
+        ball.checkPaddleCollision(leftPaddle);
+        ball.checkPaddleCollision(rightPaddle);
+
+        leftPaddle.move();
+        leftPaddle.draw();
+        rightPaddle.move();
+        rightPaddle.draw();
+
+        leftPaddle.restrict();
+        rightPaddle.restrict();
+
+        displayScores();
+        checkGameOver();
+    }
+
+    public void displayScores() {
+        fill(255);
+        text(scoreL, 100, 50);
+        text(scoreR, width - 100, 50);
+    }
+
+    public void checkGameOver() {
+        if (scoreL == winScore) {
+            gameOver("Green wins!", leftPaddle.getColor());
+        }
+        if (scoreR == winScore) {
+            gameOver("Yellow wins!", rightPaddle.getColor());
+        }
+    }
+
+    public void gameOver(String text, int c) {
+        ball.setSpeed(0, 0);
+        fill(255);
+        text("Game over", width / 2, height / 3 - 40);
+        text("Click to play again", width / 2, height / 3 + 40);
+        fill(c);
+        text(text, width / 2, height / 3);
+
+        if (mousePressed) {
+            scoreL = 0;
+            scoreR = 0;
+            ball.setSpeed(3, 2);
+        }
+    }
+
+    public void keyPressed() {
+        if (key == 'w' || key == 'W') {
+            leftPaddle.setUp(true);
+        }
+        if (key == 's' || key == 'S') {
+            leftPaddle.setDown(true);
+        }
+        if (keyCode == DOWN) {
+            rightPaddle.setDown(true);
+        }
+        if (keyCode == UP) {
+            rightPaddle.setUp(true);
+        }
+    }
+
+    public void keyReleased() {
+        if (key == 'w' || key == 'W') {
+            leftPaddle.setUp(false);
+        }
+        if (key == 's' || key == 'S') {
+            leftPaddle.setDown(false);
+        }
+        if (keyCode == DOWN) {
+            rightPaddle.setDown(false);
+        }
+        if (keyCode == UP) {
+            rightPaddle.setUp(false);
+        }
+    }
+
+    public static void main(String[] args) {
+        PApplet.main("PingPong");
+    }
+}
+
+import processing.core.*;  
 
 public class pingpong extends PApplet {
     
-    // Ball and Paddle Variables
-    int x, y, w, z, speedX, speedY;
-    int paddleXL, paddleYL, paddleW, paddleZ, paddleK;
-    int paddleXR, paddleYR;
-    boolean upL, downL; 
-    boolean upR, downR;
+    //Ball wnd Paddle Variables
+    Ball ball
+    Paddle leftPaddle, rightPaddle; 
     
-    // Colors
+    // Colors 
     int colorL = color(0, 255, 0);  // Left paddle color
     int colorR = color(255, 255, 0);  // Right paddle color
     
@@ -24,30 +104,21 @@ public class pingpong extends PApplet {
     int winScore = 5;
     
     public void settings() {
-        size(1000, 1000);  // Set the canvas size
+        size(500, 500);  // Set the canvas size
     }
-
-    public void setup() {
-        x = width / 2;
-        y = height / 2;
-        w = 50; 
-        z = 50;   
-        speedX = 3; 
-        speedY = 2;
         
+    public void setup() 
+    {
+        ball = new Ball(width / 2, height / 2, 50, 50, 3, 2);
+        leftPaddle = new Paddle(40, height / 2, 30, 100, 5, color(0, 255, 0));
+        rightPaddle = new Paddle(width - 40, height / 2, 30, 100, 5, color(255, 255, 0));
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        rectMode(CENTER);
         textSize(30);
         textAlign(CENTER, CENTER);
         rectMode(CENTER);
         
-        // Paddle setup
-        paddleXL = 40;
-        paddleYL = height / 2;
-        
-        paddleXR = width - 40;
-        paddleYR = height / 2;
-        paddleW = 30;
-        paddleZ = 100;
-        paddleK = 5;
     }
 
     public void draw() {
@@ -59,8 +130,11 @@ public class pingpong extends PApplet {
         
         movePaddle();
         drawPaddles();
+        restrictPaddle();
+        contactPaddle();
         
-
+        scores();
+        gameOver();
     }
 
     // Draw paddles
@@ -87,6 +161,37 @@ public class pingpong extends PApplet {
         }
     }
 
+    // Restrict paddles within the window boundaries
+    void restrictPaddle() {
+        if (paddleYL - paddleZ / 2 < 0) {
+            paddleYL = paddleYL + paddleK;
+        }
+        if (paddleYL + paddleZ / 2 > height) {
+            paddleYL = paddleYL - paddleK;
+        }
+        if (paddleYR - paddleZ / 2 < 0) {
+            paddleYR = paddleYR + paddleK;
+        }
+        if (paddleYR + paddleZ / 2 > height) {
+            paddleYR = paddleYR - paddleK;
+        }
+    }
+
+    // Handle ball and paddle collision
+    void contactPaddle() {
+        // Left paddle collision
+        if (x - w / 2 < paddleXL + paddleW / 2 && y - z / 2 < paddleYL + paddleZ / 2 && y + z / 2 > paddleYL - paddleZ / 2) { 
+            if(speedX < 0) {
+                speedX = -speedX;
+            }
+        }
+        // Right paddle collision
+        else if (x + w / 2 > paddleXR - paddleW / 2 && y - z / 2 < paddleYR + paddleZ / 2 && y + z / 2 > paddleYR - paddleZ / 2) {
+            if(speedX > 0){
+                speedX = -speedX;
+            }
+        }
+    }
 
     // Draw the ball (circle)
     void drawCircle() {
@@ -116,6 +221,43 @@ public class pingpong extends PApplet {
         else if (y < 0 + z / 2) { 
             speedY = -speedY;
         }
+    }
+
+    // Display the score
+    void scores() {
+        fill(255);
+        text(scoreL, 100, 50);
+        text(scoreR, width - 100, 50);
+    }
+
+    // Check for game over and display message
+    void gameOver() {
+        if(scoreL == winScore) {
+            gameOverPage("Green wins!", colorL);
+        }
+        
+        if(scoreR == winScore) {
+            gameOverPage("Yellow wins!", colorR);
+        }
+    }
+
+    // Display the game over screen and allow restart
+    void gameOverPage(String text, int c) {
+        speedX = 0;
+        speedY = 0;
+        
+        fill(255);
+        text("Game over", width / 2, height / 3 - 40);
+        text("Click to play again", width / 2, height / 3 + 40);
+        fill(c);
+        text(text, width / 2, height / 3);
+        
+        if(mousePressed) {
+            scoreR = 0;
+            scoreL = 0;
+            speedX = 2;
+            speedY = 3;
+        } 
     }
 
     // Handle key press events for paddles
@@ -155,3 +297,4 @@ public class pingpong extends PApplet {
         PApplet.main("pingpong");
     }
 }
+
