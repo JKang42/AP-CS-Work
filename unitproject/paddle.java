@@ -1,72 +1,42 @@
 import processing.core.PApplet;
 
 public class Paddle {
-
-    // Colors
-    int colorL = color(0, 255, 0);  // Left paddle color
-    int colorR = color(255, 255, 0);  // Right paddle color
-    
+    PApplet p;
     int x, y, width, height, speed;
-    int color;
-    boolean up, down;
+    int paddleColor;
+    boolean movingUp, movingDown;
 
-    public Paddle(int x, int y, int width, int height, int speed, int color) {
+    Paddle(PApplet p, int x, int y, int width, int height, int speed, int paddleColor) {
+        this.p = p;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.color = color;
+        this.paddleColor = paddleColor;
     }
 
-    public void move() {
-        if (up) {
-            y += speed;
-        }
-        if (down) {
+    public void update() {
+        if (movingUp && y - height / 2 > 0) {
             y -= speed;
         }
-    }
-
-    public void draw() {
-        fill(color);
-        rect(x, y, width, height);
-    }
-
-    public void restrict() {
-        if (y - height / 2 < 0) {
-            y = height / 2;
-        }
-        if (y + height / 2 > height) {
-            y = height - height / 2;
+        if (movingDown && y + height / 2 < p.height) {
+            y += speed;
         }
     }
 
-    public void setUp(boolean state) {
-        up = state;
+    public void display() {
+        p.fill(paddleColor);
+        p.rect(x, y, width, height);
     }
 
-    public void setDown(boolean state) {
-        down = state;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getColor() {
-        return color;
+    public void handleKeyPress(char key, int keyCode, boolean pressed) {
+        if (x < p.width / 2) { // Left paddle (W & S)
+            if (key == 'w' || key == 'W') movingUp = pressed;
+            if (key == 's' || key == 'S') movingDown = pressed;
+        } else { // Right paddle (Arrow Keys)
+            if (keyCode == p.UP) movingUp = pressed;
+            if (keyCode == p.DOWN) movingDown = pressed;
+        }
     }
 }

@@ -1,14 +1,15 @@
 import processing.core.PApplet;
 
 public class Ball {
+    PApplet p;
+    int x, y, w, h, speedX, speedY;
 
-    int x, y, w, z, speedX, speedY;
-
-    public Ball(int x, int y, int w, int z, int speedX, int speedY) {
+    Ball(PApplet p, int x, int y, int w, int h, int speedX, int speedY) {
+        this.p = p;
         this.x = x;
         this.y = y;
         this.w = w;
-        this.z = z;
+        this.h = h;
         this.speedX = speedX;
         this.speedY = speedY;
     }
@@ -18,39 +19,53 @@ public class Ball {
         y += speedY;
     }
 
-    public void draw() {
-        fill(255, 0, 0);
-        ellipse(x, y, w, z);
+    public void display() {
+        p.fill(255, 0, 0);
+        p.ellipse(x, y, w, h);
     }
 
-    public void bounceOffWalls() {
-        if (x > width - w / 2) {
-            resetPosition();
-            PingPong.scoreL++;
-        } else if (x < 0 + w / 2) {
-            resetPosition();
-            PingPong.scoreR++;
-        }
-        if (y > height - z / 2 || y < 0 + z / 2) {
+    public void checkWallCollision() {
+        if (y > p.height - h / 2 || y < h / 2) {
             speedY = -speedY;
         }
     }
 
-    public void checkPaddleCollision(Paddle paddle) {
-        if (x - w / 2 < paddle.getX() + paddle.getWidth() / 2 && x + w / 2 > paddle.getX() - paddle.getWidth() / 2 &&
-            y - z / 2 < paddle.getY() + paddle.getHeight() / 2 && y + z / 2 > paddle.getY() - paddle.getHeight() / 2) {
-            speedX = -speedX;
+    public void checkPaddleCollision(Paddle leftPaddle, Paddle rightPaddle, PingPong game) {
+        if (x - w / 2 < leftPaddle.x + leftPaddle.width / 2 && 
+            y > leftPaddle.y - leftPaddle.height / 2 && 
+            y < leftPaddle.y + leftPaddle.height / 2) {
+            
+            if (speedX < 0) {
+                speedX = -speedX;
+            }
+        } 
+        else if (x + w / 2 > rightPaddle.x - rightPaddle.width / 2 && 
+                 y > rightPaddle.y - rightPaddle.height / 2 && 
+                 y < rightPaddle.y + rightPaddle.height / 2) {
+            
+            if (speedX > 0) {
+                speedX = -speedX;
+            }
+        }
+
+        if (x > p.width - w / 2) {
+            game.scoreL++;
+            reset();
+        } else if (x < w / 2) {
+            game.scoreR++;
+            reset();
         }
     }
 
-    public void setSpeed(int speedX, int speedY) {
-        this.speedX = speedX;
-        this.speedY = speedY;
+    public void stop() {
+        speedX = 0;
+        speedY = 0;
     }
 
-    private void resetPosition() {
-        x = width / 2;
-        y = height / 2;
-        speedX = -speedX;
+    public void reset() {
+        x = p.width / 2;
+        y = p.height / 2;
+        speedX = (speedX > 0) ? -3 : 3;
+        speedY = (speedY > 0) ? -2 : 2;
     }
 }
