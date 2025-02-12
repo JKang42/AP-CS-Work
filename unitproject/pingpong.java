@@ -1,3 +1,7 @@
+//paddle = 0
+//key released = 0 
+//add velocity but when you press key velocity is non 0 
+
 import processing.core.PApplet;
 
 public class PingPong extends PApplet {
@@ -8,7 +12,7 @@ public class PingPong extends PApplet {
     int scoreL = 0, scoreR = 0;
 
     public void settings() {
-        size(500, 500);
+        size(1200, 1200);
     }
 
     public void setup() {

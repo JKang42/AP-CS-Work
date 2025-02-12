@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
+
 public class AnimalCalculator
 {
     public static void printAnimals (ArrayList<Animal> animals)
     {
         for (Animal animal : animals)
         {
-            System.out.println(animal.getName() + "legs:" animal.getLegCount() + (animal.isFurry() ? "furry" : "not furry")); 
+            System.out.println(animal.getName() + "legs: " + animal.getLegCount() + " " + (animal.isFurry() ? "furry" : "not furry")); 
         }
     }
     
@@ -24,11 +27,13 @@ public class AnimalCalculator
         Animal minAnimal = animals.get(0);
         for (Animal animal : animals)
         {
-             if (animal.getLegCount() < minAnimal.getLegCount()) {
+             if (animal.getLegCount() < minAnimal.getLegCount()) 
+             {
                 minAnimal = animal;
-                
-        }
+             }
+        }      
         
-        return minAmimal; 
+        return minAnimal; 
     }
 }
+    
