@@ -14,12 +14,27 @@ public class ArrayInitalization
                 if (row == column)
                 
                     array2D[row][column] = 1; 
+                  System.out.print(array2D[row][column]); 
             }
+            System.out.println();
+            
         }
-        
+
+
         //Part B 
         
-        String [][] stringarray2D = new String[10][10];
+        String[][] array2Db = {{"world", "hello"}, {"bye", "dog"}}; 
+        
+        for (int row = 0; row < array2Db.length; row++)
+        {
+            for (int column = 0; column < array2Db[row].length; column++)
+            {
+                  System.out.print(array2Db[row][column]); 
+            }
+            System.out.println();
+            
+        }
+
         
         //Part C
         
@@ -33,10 +48,16 @@ public class ArrayInitalization
             {
                 val += 1; 
                 array2Dc[row][column] = val; 
+                System.out.print(array2Dc[row][column]);
             }
             
             val += 5;
-        }
+            
+            System.out.println();
+        
+        }  
+        
+    
         
         //Part D 
         
@@ -49,10 +70,14 @@ public class ArrayInitalization
             for (int column = 0; column < array2Dd[row].length; column++)
             {
                 array2Dd[row][column] = value; 
+                System.out.print(array2Dd[row][column]);
             }
             
             value += 1;
+            
+            System.out.println();
         }
+        
 
     }
 }
