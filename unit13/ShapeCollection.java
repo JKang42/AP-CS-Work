@@ -58,7 +58,10 @@ public class ShapeCollection
 
         }
         
-        System.out.println(even); 
+        for (Shape s : even)
+       {
+           System.out.println(s.getname());
+       }
         return even; 
                  
     }
@@ -77,6 +80,15 @@ public class ShapeCollection
         collectionofshapes.addShape(triangle);
         collectionofshapes.addShape(pentagon);
         collectionofshapes.addShape(circle);
+        
+        
+        collectionofshapes.numberOfSides("Square");
+        collectionofshapes.numberOfSides("Rhombus");
+        
+        collectionofshapes.averageSide(); 
+        
+        collectionofshapes.shapeEven();
+        
      
     }
 }
